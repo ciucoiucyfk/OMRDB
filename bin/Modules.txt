@@ -1,0 +1,12 @@
+Modules used
+
+MySQL python connector
+time
+pickle
+OpenCV
+numpy
+colorama
+sys
+os
+
+use vs
