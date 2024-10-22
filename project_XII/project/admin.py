@@ -38,6 +38,8 @@ def run():
     elif f == 3:
         c = connector.call("select rollno from student")
         d = connector.call("select rollno from answers")
+        #print("DEBUG START")
+        #print(c,d)
         if len(c) == 0:
             if len(d) == 0:
                 print(colorama.Fore.BLUE,"<<ADMIN>>  NO SUCH TABLE EXISTS PLEASE EXIT")                
@@ -45,8 +47,9 @@ def run():
                 exit()
         else:
             for w in c:
-                connector.action(f"delete from student where (rollno = {w[0]})")
-                connector.action(f"delete from answers where (rollno = {w[0]})")
+                #print(w[0])
+                connector.action(f"delete from student where (rollno = {int(w[0])})")
+                connector.action(f"delete from answers where (rollno = {int(w[0])})")
                 connector.commit()
             print(f"<<ADMIN>>  PURGED ALL {len(c)} ENTRIES FROM TABLES STUDENT AND ANSWERS")
         
@@ -66,10 +69,11 @@ def run():
             print(f"<<ADMIN>> Rollno > {y[0]}  Name >> {y[1]}   Grade >> {y[2]}   Marks >> {y[3]}")
     
     elif f ==2:
-        print("<<ADMIN>> Enter options without space (MUST BE 10 options from a >> e)")
+        (sjr) = input("Enter size of answer key ");sjr=int(sjr)
+        print(f"<<ADMIN>> Enter options without space (MUST BE {sjr} options from a >> e)")
         f = tuple(input(">> "))
-        if len(f) != 10:
-            #print(f,len(f))            
+        if len(f) != (sjr):
+            print(f,len(f),(sjr))            
             print("<<ADMIN>> INVALID ANSWER KEY LOADED REJECTING....")
             input()
             exit()
@@ -78,8 +82,8 @@ def run():
             print("Setting up preloaded answer key ... \n")
             connector.action("Create Table akey (QID INT PRIMARY KEY,question VARCHAR(45),answer VARCHAR(45) , marks INT)")    
             connector.commit()
-            for x in range(1,11):
-                connector.action(f"insert into akey (QID,answer,marks) values ({x},'{f[x-1]}',10)")
+            for x in range(0,(sjr)):
+                connector.action(f"insert into akey (QID,answer,marks) values ({x+1},'{f[x]}',10)")
             print("\n\n\n\n<<ADMIN>> CHANGED ANSWER KEY .")
                 
 

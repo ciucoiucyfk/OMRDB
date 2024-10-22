@@ -16,11 +16,12 @@ def reader(rl):
         print(f">>> {c}. {x}")
         c+=1
     
-    a = input("\n\n Please Enter File Name. ")    
-    if a in (f):
+    a = input("\n\n Please Enter Number ")    
+    if int(a) <= len(f):
         print("Reading file")
         time.sleep(1)
-        cvs(a,rl)
+        print(a)
+        cvs(f[int(a)-1],rl)
     else:
         print("File doesnt Exist")
         input()
@@ -96,6 +97,8 @@ def cvs(fi,rl,show = False):
                 #cv2.waitKey(0)
                 xs.append(s)
 
+    imcache = []
+
     for f in wr:
             if f.size != 0:
                 cv2.drawContours(imc,f,-1,(0,0,255),10)    
@@ -107,9 +110,11 @@ def cvs(fi,rl,show = False):
                 imwg = cv2.cvtColor(imwarp,cv2.COLOR_BGR2GRAY)
                 thresh = cv2.threshold(imwg,120,300,cv2.THRESH_BINARY_INV)[1]
                 sp(thresh)
+                imcache.extend([imwg,thresh])
                 #cv2.imshow('s',thresh)
                 #cv2.waitKey(0)
 
+    imcache.extend([imgg,imblur,imgcan])
 
     def eval():
         c = 1
@@ -161,7 +166,7 @@ def cvs(fi,rl,show = False):
 
 
     if input("Do you want to view image (y/n) ").lower() == 'y':
-        display.imdis((imgg,imblur,imgcan,imwg,thresh,gh),3,250,250)
+        display.imdis(tuple(imcache),4,250,180)
 
 
     from cv import cvwrite

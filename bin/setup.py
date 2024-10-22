@@ -47,8 +47,11 @@ def credentials():
 
 def answers():
     print("Setting up answers table \n")
-    cursor.execute("Create table answers (rollno int primary key, op1 varchar(5), op2 varchar(5), op3 varchar(5), op4 varchar(5), op5 varchar(5), op6 varchar(5), op7 varchar(5), op8 varchar(5), op9 varchar(5), op10 varchar(5))")
-    mydb.commit()
+    cursor.execute("Create table answers (rollno int primary key)")
+    size = 40
+    for x in range(0,size):
+        cursor.execute(f"alter table answers add column (op{x+1} varchar(10))")
+        mydb.commit()
     print("Done \n\n")
     input()
 
@@ -59,7 +62,7 @@ def student():
     print("Done \n\n")
     input() 
 
-
+#answers()
 setup(1)
 print("YOU CAN BEGIN USING ")
 input()

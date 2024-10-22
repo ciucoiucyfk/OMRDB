@@ -22,3 +22,8 @@ def action(command):
         mydb.commit()
 def commit():
         mydb.commit()
+def scol(table):
+        k= mydb.cursor()
+        k.execute(f"describe {table}")
+        s = k.fetchall()        
+        return(len(s))

@@ -25,8 +25,18 @@ def insert():
         x = reader.run(roll_no)
         connector.commit()
         connector.commit()
-        f  = connector.call(f"Select * From answers where rollno = {roll_no}")        
-        print(f"\n\n\n\nUSER ANSWERS >> {f}")
+        f  = connector.call(f"Select * From answers where rollno = {roll_no}")[0] 
+        vermax = []
+        for x in range(0,len(f)):
+           if type(f[x])== int:
+                pass
+           elif f[x] == None:
+              #print('d')
+              pass
+           else:
+                vermax.append((x,f[x]))
+
+        print(f"\n\n\n\nUSER ANSWERS >> {vermax}")
         k = eval.reader(roll_no)
         f = connector.action(f"insert into student (rollno,name,class,marks) values ({roll_no},'{name}',{grade},{k})")
         connector.commit()
@@ -39,6 +49,6 @@ def insert():
     b) Roll No {roll_no}
     c) Grade :- {grade}
     d) Marks :- {k}
-    e) Correct :- {k/10}/10
+    e) Correct :- {k/10}
 """)
         
