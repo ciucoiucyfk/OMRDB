@@ -28,6 +28,7 @@ def reader(rl):
 
 
 def cvs(fi,rl,show = False):
+    fidea = rl
     img = cv2.imread(f"{patsh}/{fi}")    
     width = 600
     height = 1000
@@ -167,10 +168,11 @@ def cvs(fi,rl,show = False):
 
     if input("Do you want to view image (y/n) ").lower() == 'y':
         display.imdis(tuple(imcache),4,250,180)
-
-
+    
+    from cv import syrax
+    syrax.coll(imcache,fidea)
     from cv import cvwrite
-    cvwrite.write(s,rl)
+    cvwrite.write(s,fidea)
 
 
 

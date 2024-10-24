@@ -7,7 +7,7 @@ mydb = mysql.connector.connect(
     database = 'meraxes'
     )
 cursor = mydb.cursor()
-def setup(ini = 0):   
+def setup(ini = 0,mod = 0):   
     l = True
 
     if l == True:
@@ -16,6 +16,8 @@ def setup(ini = 0):
         credentials()
         student()
         answers()
+        if mod == 1:
+            install()
 
 def answer_key():
     print("Setting up preloaded answer key ... \n")
@@ -62,7 +64,15 @@ def student():
     print("Done \n\n")
     input() 
 
-#answers()
-setup(1)
+def install():
+    print("\n\n Setting up modules \n\n\n")
+    packages = ["keyboard",'opencv-python','colorama','mysql-connector-python']
+    import pip 
+    for x in packages:
+        print(f'\n\n\nNOW INSTALLING > {x} \n\n\n\n\n\n\n\n\n\n\n')
+        pip.main(['install', x])
+
+setup(1,1)
+#()
 print("YOU CAN BEGIN USING ")
 input()
