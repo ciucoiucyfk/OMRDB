@@ -105,14 +105,13 @@ def run():
             print(f'{i}. {l[1]} >> {l[0]}');i+=1
         f = input(f'Choose roll no ')
         ans = connector.call(f"select * from answers where rollno = {f}")[0]
-        p = connector.call(f"Select * from akey");phi = []
+        p = connector.call(f"Select * from akey");phi = []       
         
-
         import os
         imgal = []
         if input("View Images associated?? ").lower() == 'y':
             for n in os.listdir(f'C:/Users/Abhinav/Documents/Class 12 Project Computer/project_XII/holder/{f}'):
-                print(n)
+                #print(n)
                 kla = cv2.imread(f'C:/Users/Abhinav/Documents/Class 12 Project Computer/project_XII/holder/{f}/{n}',0)
                 #cv2.imshow('a',kla)
                 #cv2.waitKey(0)
@@ -122,8 +121,6 @@ def run():
             from project import display
 
             display.imds(tuple(imgal),4,250,180)
-
-
             
         for n in p:
             phi.append(n[2])
